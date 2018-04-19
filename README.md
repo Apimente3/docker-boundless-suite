@@ -2,27 +2,23 @@
 
 Docker para [boundless suite](https://boundlessgeo.com/).
 
-## Instalación
+## Variables de entorno
 
-1. Establece las siguientes variables de entorno:
-    - DOCKER_POSTGIS_PASSWORD=postgres
-    - DOCKER_POSTGIS_USER=postgres
-    - DOCKER_POSTGIS_PORT=5432
-    - DOCKER_BOUNDLESS_PORT=8080
-2. ```$ git clone https://github.com/mxabierto/docker-boundless-suite suite```
-3. ```$ cd suite```
-4. ```$ docker-compose up```
+* JAVA_OPTS
+  * Variable para la configuración de la JVM y plugins de geoserver
+  ```
+  -Xms2048m -Xmx4096m -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:-UsePerfData -Dorg.geotools.referencing.forceXY=true -Dorg.geotoools.render.lite.scale.unitCompensation=true -Xbootclasspath/a:/usr/local/tomcat/lib/marlin-0.7.3-Unsafe.jar -Dsun.java2d.renderer=org.marlin.pisces.PiscesRenderingEngine -Dsun.java2d.renderer.useThreadLocal=false -Djava.library.path=/usr/lib:/usr/lib/jni:/opt/libjpeg-turbo/lib64:/usr/lib64 -Xbootclasspath/a:/opt/tomcat/lib/marlin-0.7.3-Unsafe.jar -Dsun.java2d.renderer=org.marlin.pisces.PiscesRenderingEngine -Dsun.java2d.renderer.useThreadLocal=false -server
+  ```
+* GEOSERVER_DATA_DIR 
+  * Monta un volumen con una configuración previa de geoserver, por defecto se usa `/var/opt/boundless/server/geoserver/default_data` 
 
-
-## Suite endpoints
+## Endpoints
 | Endpoint    | Description            |
 |-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| /composer    | Style and create maps easily. Uses YSLD, a compact and simple markup language for styling layers. Includes a real-time editor.            |
-| /wpsbuilder  | Create powerful chains of geospatial processes graphically in your browser. Requires the GeoServer WPS extension                          |
-| /geoserver   | Powerful map and data server for sharing, analyzing, and editing geospatial data from any major spatial data source using open standards. |
-| /geowebcache | Accelerates delivery of web maps by caching map image tiles upfront or on-demand.                                                         |
-| /quickview   | Provides modular components so you can build your own web map application. The demo is a sample web map viewer created using Web SDK.     |
-| /dashboard   | Tool to check the services the tool has implemented.                                                                                      |
+| /composer    | Herramienta para la creación y estilización de mapas.            |
+| /geoserver   | Herramienta para la gestión y publicación de datos geograficos. |
+| /quickview   | Herramienta para la consulta de los datos.     |
+
 ## Geoserver
 Las contraseñas por default son ```admin:geoserver```, recuerda cambiarlas para una mayor seguridad de tu servicio.
 Enlaces útiles:
